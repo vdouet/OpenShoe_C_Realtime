@@ -29,7 +29,6 @@ void settings(float u[][FILE_SIZE])
     simdata.init_heading = 0 * pi / 180;
 
     // Initial position (x,y,z)-axis [m]
-    //memset(simdata.init_pos, 0, sizeof(simdata.init_pos));
     simdata.init_pos[0] = 0;
     simdata.init_pos[1] = 0;
     simdata.init_pos[2] = 0;
@@ -46,12 +45,10 @@ void settings(float u[][FILE_SIZE])
     // Standard deviation of the acceleromter noise [m/s^2]. This is used to
     // control the zero-velocity detectors trust in the accelerometer data.
     simdata.sigma_a = 0.01;
-    //simdata.sigma_a = 0.5;
 
     // Standard deviation of the gyroscope noise [rad/s]. This is used to
     // control the zero-velocity detectors trust in the gyroscope data.
     simdata.sigma_g = 0.1 * pi / 180;
-    //simdata.sigma_g = 0.45 * pi / 180;
 
     // Window size of the zero-velocity detector [samples]
     simdata.Window_size = 3;
@@ -59,7 +56,6 @@ void settings(float u[][FILE_SIZE])
     // Threshold used in the zero-velocity detector. If the test statistics are
     // below this value the zero-velocity hypothesis is chosen.
     simdata.gamma = 5000;
-    //simdata.gamma = 8000;
 
     /*************** FILTER PARAMETERS ****************/
 
@@ -72,18 +68,12 @@ void settings(float u[][FILE_SIZE])
     simdata.sigma_acc[0] = 0.5 * 1;
     simdata.sigma_acc[1] = 0.5 * 1;
     simdata.sigma_acc[2] = 0.5 * 1;
-    //simdata.sigma_acc[0] = 0.2 * 1;
-    //simdata.sigma_acc[1] = 0.2 * 1;
-    //simdata.sigma_acc[2] = 0.2 * 1;
 
     // Process noise for modeling the gyroscope noise (x,y,z platform coordinate
     // axis) and other gyroscope errors [rad/s].
     simdata.sigma_gyro[0] = 0.5 * 1 * pi / 180; //[rad/s]
     simdata.sigma_gyro[1] = 0.5 * 1 * pi / 180; //[rad/s]
     simdata.sigma_gyro[2] = 0.5 * 1 * pi / 180; //[rad/s]
-    //simdata.sigma_gyro[0] = 0.6 * 1 * pi / 180; //[rad/s]
-    //simdata.sigma_gyro[1] = 0.6 * 1 * pi / 180; //[rad/s]
-    //simdata.sigma_gyro[2] = 0.6 * 1 * pi / 180; //[rad/s]
 
 
     // Pseudo zero-velocity update measurement noise covariance (R). The
