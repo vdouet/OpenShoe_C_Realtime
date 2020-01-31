@@ -9,8 +9,6 @@
 #include "settings.h"
 #include "zero_velocity_detector.h"
 #include "ZUPTaidedINS.h"
-#include "smoothed_ZUPTaidedINS.h"
-
 
 /* ZUPTaided_INS variable */
 int N = WINDOWS_SIZE;
