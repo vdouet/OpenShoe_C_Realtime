@@ -2,7 +2,7 @@
 
 /* To compile and link in command line do the following :
  *
- * gcc -O3 main.cpp settings.cpp zero_velocity_detector.cpp ZUPTaidedINS.cpp -o OpenShoeC
+ * gcc -O3 main.c settings.c zero_velocity_detector.c ZUPTaidedINS.c -o OpenShoeC
  *
  */
 
