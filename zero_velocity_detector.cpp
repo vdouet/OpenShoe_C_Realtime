@@ -1,15 +1,10 @@
 #include "zero_velocity_detector.h"
 
-// Load the simulation settings
-//
-void GLRT_f(float u[][WINDOWS_SIZE], float *T);
-
-void ARE_f(float u[][WINDOWS_SIZE], float *T);
-
 void zero_velocity_detector(float u[][WINDOWS_SIZE], int zupt[]) {
 
   int i,k;
   int idx = 0;
+  
   // Allocate memory
   int W = simdata.Window_size;
   int N = WINDOWS_SIZE;
@@ -43,19 +38,11 @@ void zero_velocity_detector(float u[][WINDOWS_SIZE], int zupt[]) {
           break;
   }
 
-  /*int len = LENGTH(zupt);
-  for(i = 0; i < len; i++) {
-    Serial.println(zupt[i]);
-  }*/
-
-  //Serial.println("2");
-  //Serial.println(LENGTH(zupt));
   int T_size = N-W+1;
   int zupt_size = N;
 
   // Check if the test statistics T are below the detector threshold. If so,
   // chose the hypothesis that the system has zero velocity
-  //Serial.println("1");
   for(k = 0; k < T_size; k++) {
     if(T[k] < simdata.gamma) {
       for(i = 0; i < W; i++) {
@@ -64,7 +51,6 @@ void zero_velocity_detector(float u[][WINDOWS_SIZE], int zupt[]) {
     }
   }
 
-  //Serial.println("2");
   // Fix the edges of the detector statistics
   int size = T_size + floor(W/2)*2;
   float T_n[size];
@@ -81,20 +67,6 @@ void zero_velocity_detector(float u[][WINDOWS_SIZE], int zupt[]) {
       T_n[i + idx] = max(T, T_size);
   }
 
-  //Serial.println(zupt[0]);
-  /*for(i = 0; i < LENGTH(T_n); i++) {
-    //printf("%f ", T_n[i]);
-  }*/
-
-  /*for(i = 0; i < zupt_size; i++) {
-    Serial.println(zupt[i]);
-    //if(zupt[i] == 1)
-      //printf("oui ");
-    //else
-      //printf("Non ");
-  }*/
-
-  //Serial.println(" ");
 }
 
 void GLRT_f(float u[][WINDOWS_SIZE], float *T) {
@@ -108,8 +80,7 @@ void GLRT_f(float u[][WINDOWS_SIZE], float *T) {
   float a = 0, b = 0;
   int i,k,l;
 
-  int N = WINDOWS_SIZE; //Change W to a buffer in the futur ?
-  //float T[N-W+1] = {0};
+  int N = WINDOWS_SIZE;
 
   for(k = 0; k < N-W+1; k++) {
 
@@ -119,28 +90,19 @@ void GLRT_f(float u[][WINDOWS_SIZE], float *T) {
       ya_m[1] = u[1][i] + u[1][i+1] + u[1][i+2];
       ya_m[2] = u[2][i] + u[2][i+1] + u[2][i+2];
 
-      //printf("%f %f %f\n", u[0][i], u[0][i+1], u[0][i+2]);
-      //printf("%f %f %f\n", u[1][i], u[1][i+1], u[1][i+2]);
-      //printf("%f %f %f\n", u[2][i], u[2][i+1], u[2][i+2]);
-      //printf("\n");
-
     }
     ya_m[0] /= W;
     ya_m[1] /= W;
     ya_m[2] /= W;
-    //printf("%f %f %f\n", ya_m[0], ya_m[1], ya_m[2]);
-
-
-
 
     for(l = k; l <= k+W-1; l++) {
 
       tmp[0] = u[0][l] - (g * ya_m[0] / sqrt(ya_m[0] * ya_m[0] + ya_m[1] * ya_m[1] + ya_m[2] * ya_m[2]));
       tmp[1] = u[1][l] - (g * ya_m[1] / sqrt(ya_m[0] * ya_m[0] + ya_m[1] * ya_m[1] + ya_m[2] * ya_m[2]));
       tmp[2] = u[2][l] - (g * ya_m[2] / sqrt(ya_m[0] * ya_m[0] + ya_m[1] * ya_m[1] + ya_m[2] * ya_m[2]));
-      //printf("%d \n", l);
+
       a = (u[3][l] * u[3][l] + u[4][l] * u[4][l] + u[5][l] * u[5][l]) / sigma2_g; //a = u(4:6,l)'*u(4:6,l)/sigma2_g
-      //printf("%f \n", a);
+
       b = (tmp[0] * tmp[0] + tmp[1] * tmp[1] + tmp[2] * tmp[2]) / sigma2_a; //b = tmp'*tmp/sigma2_a
       T[k] = T[k] + a + b; // T(k)+u(4:6,l)'*u(4:6,l)/sigma2_g+tmp'*tmp/sigma2_a;
 
@@ -163,7 +125,7 @@ void ARE_f(float u[][WINDOWS_SIZE], float *T) {
   int W = simdata.Window_size;
   int i = 0, k = 0, l = 0;
 
-  int N = WINDOWS_SIZE; //Change W to a buffer in the futur ?
+  int N = WINDOWS_SIZE;
 
   for(k = 0; k < N-W+1; k++) {
     for(l = k; l <= k+W-1; l++) {
