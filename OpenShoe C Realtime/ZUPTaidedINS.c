@@ -1,3 +1,8 @@
+/*
+Modified work Copyright (c) 2020 Victor Douet <victor.douet@gmail.com>, ISC License (open source)
+Original work: Copyright (c) 2011 OpenShoe, ISC License (open source)
+*/
+
 #include "ZUPTaidedINS.h"
 
 void ZUPTaidedINS(float u[][WINDOWS_SIZE], int zupt[], float x_h[][WINDOWS_SIZE], float cov[][WINDOWS_SIZE], float quat[][WINDOWS_SIZE], float P[][9][WINDOWS_SIZE], float Q[][6], float R[][3], int H[][9], int Id[][9], int N)

@@ -1,10 +1,15 @@
+/*
+Modified work Copyright (c) 2020 Victor Douet <victor.douet@gmail.com>, ISC License (open source)
+Original work: Copyright (c) 2011 OpenShoe, ISC License (open source)
+*/
+
 #include "zero_velocity_detector.h"
 
 void zero_velocity_detector(float u[][WINDOWS_SIZE], int zupt[]) {
 
   int i,k;
   int idx = 0;
-  
+
   // Allocate memory
   int W = simdata.Window_size;
   int N = WINDOWS_SIZE;
